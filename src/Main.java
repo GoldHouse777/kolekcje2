@@ -7,7 +7,7 @@ public class Main {
         System.out.println("Hello world!");
         //TABLICA
         /*
-        - tablica musi miec zdefiniowant rozmiar, ktorego potem nie mozemy zmienic.
+        - tablica musi miec zdefiniowany rozmiar, ktorego potem nie mozemy zmienic.
         - tablica przechowuje typy proste i zlozone.
          */
 
@@ -73,8 +73,48 @@ public class Main {
             int wartosc = klawiatura.nextInt();
             listaLiczbZKlawiatury.add(wartosc);
         }
-        //trafione czyli takie ktore sa i we wpisanych i w wylosowanych
+}
 
+    /**
+     * wylosujLiczby - metoda która losuje liczby całkowite z zakresu od 1 do 100
+     * @param ile - liczba wylosowanych wartości
+     * @return - lista z wylosowanymi wartościami
+     */
+    private ArrayList<Integer> wylosujLiczby(int ile) {
+        ArrayList<Integer> listaLosowychBezPowtorzen = new ArrayList<>();
+        int liczba;
+        for (int i = 0; i < ile; i++) {
+            liczba = (int) (Math.random() * 100 + 1);
+            while (listaLosowychBezPowtorzen.contains(liczba)) {
+                liczba = (int) (Math.random() * 100 + 1);
+            }
+            listaLosowychBezPowtorzen.add(liczba);
+        }
+        return listaLosowychBezPowtorzen;
+    }
+    private LinkedList<Integer> wczytajLiczby(int ile){
+        LinkedList<Integer> wpisane = new LinkedList<>();
+        Scanner klawiatura = new Scanner(System.in);
+        System.out.print("Podaj "+ile+" liczb");
+        for (int i = 0; i < ile; i++) {
+            wpisane.add(klawiatura.nextInt());
+        }
+        return wpisane;
+    }
 
+    private void wypiszListe(List<Integer>lista){
+        for (Integer element:lista) {
+            System.out.print(element+", ");
+        }
+    }
+
+    private ArrayList<Integer> sprawdzKtorePowtarzajaSie (ArrayList<Integer>wpisane, LinkedList<Integer>wylosowane){
+        ArrayList<Integer> trafione = new ArrayList<>();
+        for (Integer element:wylosowane){
+            if(wpisane.contains(element)){
+                trafione.add(element);
+            }
+        }
+        return  trafione;
     }
 }
